@@ -19,6 +19,6 @@ class AdminMiddleware
         if(auth()->check() && auth()->user()->isAdmin()){
             return $next($request);
         }
-        abort(403, 'Fuck You! You are not Admin lil bro.');
+        abort(403, 'You are not Authorized');
     }
 }
