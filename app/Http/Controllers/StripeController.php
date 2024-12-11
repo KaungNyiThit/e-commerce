@@ -93,39 +93,4 @@ class StripeController extends Controller
     {
         return redirect('/products');
     }
-
-    public function bu(Request $request, $id)
-    {
-        try {
-            $product = Product::find($id);
-
-            $quantity = $request->query('quantity', 1);
-
-            \Stripe\Stripe::setApiKey(config('stripe.sk'));
-    
-            $checkout_session = \Stripe\Checkout\Session::create([
-                'payment_method_types' => ['card'],
-                'line_items' => [[
-                    'price_data' => [
-                        'currency' => 'usd',
-                        'product_data' => [
-                            'name' => $product->product_name,
-                        ],
-                        'unit_amount' => $product->price * 100, 
-                    ],
-                    'quantity' => $quantity,
-                ]],
-                'mode' => 'payment',
-                'success_url' => route('stripe.success'),
-                'cancel_url' => route('stripe.cancel'),
-            ]);
-    
-            return redirect($checkout_session->url);
-        } catch (\Exception $e) {
-
-            \Log::error('Error during Stripe checkout: ' . $e->getMessage());
-    
-            return redirect()->back()->with('error', 'An error occurred during checkout. Please try again.');
-        }
-    }
 }
