@@ -3,7 +3,7 @@
 @section('content')
 
 <style>
-/* Media query for mobile devices */
+
 @media only screen and (max-width: 600px) {
     body {
         font-size: 12px;
@@ -11,7 +11,7 @@
 }
 </style>
 
-<div class="container">
+<div class="container_fluid">
 
     @if (session('suces'))
         <div class="alert alert-success">
@@ -19,8 +19,8 @@
         </div>
     @endif
 
-    <form action="" style="margin-bottom: 20px">
-            <div class="d-flex justify-content-between align-items-center mb-3">
+    <form action="" class="container" style="margin-bottom: 20px">
+            <div class="d-md-flex d-sm-block justify-content-between align-items-center mb-3">
                 <div class="d-flex">
                     <select name="category" class="p-1 btn btn-secondary">
                         <option value="">All Categories</option>
@@ -31,7 +31,7 @@
                     <button class="p-1 btn btn-outline-secondary" style="border: 1px solid; border-radius: 10px; margin-left: 10px" type="submit">Filter</button>
                 </div>
  
-            <div class="d-flex">
+            <div class="d-md-flex my-3">
                 <input type="search" name="search" style="" class="me-2 px-2 form-search" placeholder="Search by Names">
                 <button  class="p-1 btn btn-secondary" for="search" type="submit">search</button>
             </div>
@@ -40,11 +40,10 @@
     </form>
     
     
-    <table class="table table-hover table-striped align-middle text-center">
+    <table class="table container table-hover table-striped align-middle text-center">
         <tr>
             <th>Product Type</th>
             <th>Product Name</th>
-            <th>Description</th>
             <th>Price</th>
             <th>Quantity</th>
             <th>Detail</th>
@@ -56,7 +55,6 @@
         <tr >
             <td>{{ $product->category->name}}</td>
             <td>{{ $product->product_name}}</td>
-            <td>{{ $product->description}}</td>
             <td>${{ $product->price}}</td>
             <td>{{ $product->stock }}</td>
             <td>
